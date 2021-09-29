@@ -7,18 +7,18 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum LocustEnv implements EnumModel {
 
-    K("In Kubernetes"), E("External");
+  K("In Kubernetes"), E("External");
 
-    private final String value;
+  private final String value;
 
-    @Override
-    public String getKey() {
-        return name();
-    }
+  @Override
+  public String getKey() {
+    return name();
+  }
 
-    @Override
-    public String getValue() {
-        return value;
-    }
+  @Override
+  public String getValue() {
+    return value;
+  }
 
 }

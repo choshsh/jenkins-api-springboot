@@ -8,9 +8,9 @@ spring:
       "staging": "staging, default"
 ---
 spring:
-  config:
-    activate:
-      on-profile: "dev"
+  config.ctivate.on-profile: "dev"
+server:
+  port: 8081
 logging:
   level:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
@@ -23,9 +23,7 @@ spring: # default
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
     open-in-view: true
-    properties:
-      hibernate:
-        format_sql: true
+    properties.hibernate.format_sql: false
     hibernate:
       use-new-id-generator-mappings: true
       ddl-auto: create-drop
@@ -45,12 +43,11 @@ logging:
   level:
     web: warn
   pattern:
-    console: "{\"timestamp\": \"%d\", \"level\": \"%p\", \"source\": \"%logger{63}:%L\", \"message\": \"%replace(%m%wEx{6}){'[\r\n]+', '\\n'}%nopex\"}%n"
-    #console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
+    #console: "{\"timestamp\": \"%d\", \"level\": \"%p\", \"source\": \"%logger{63}:%L\", \"message\": \"%replace(%m%wEx{6}){'[\r\n]+', '\\n'}%nopex\"}%n"
+    console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
 server:
   compression:
     enabled: true
-  port: 8080
   servlet:
     context-path: /
     encoding:

@@ -5,18 +5,18 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum YN implements EnumModel{
-    Y("Y"), N("N");
+public enum YN implements EnumModel {
+  Y("Y"), N("N");
 
-    private final String value;
+  private final String value;
 
-    @Override
-    public String getKey() {
-        return name();
-    }
+  @Override
+  public String getKey() {
+    return name();
+  }
 
-    @Override
-    public String getValue() {
-        return value;
-    }
+  @Override
+  public String getValue() {
+    return value;
+  }
 }
