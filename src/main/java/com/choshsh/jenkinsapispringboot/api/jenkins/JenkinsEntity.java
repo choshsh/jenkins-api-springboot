@@ -1,6 +1,5 @@
 package com.choshsh.jenkinsapispringboot.api.jenkins;
 
-import com.cdancy.jenkins.rest.domain.job.Artifact;
 import com.choshsh.jenkinsapispringboot.config.BaseColumnEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
@@ -77,7 +76,7 @@ public class JenkinsEntity extends BaseColumnEntity {
   private long duration;
 
   @Transient
-  private List<Artifact> artifacts = new ArrayList<>();
+  private List<String> artifacts = new ArrayList<>();
 
 }
 

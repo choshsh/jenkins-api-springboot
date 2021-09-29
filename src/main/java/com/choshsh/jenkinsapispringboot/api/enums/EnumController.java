@@ -1,6 +1,5 @@
 package com.choshsh.jenkinsapispringboot.api.enums;
 
-import io.swagger.annotations.ApiOperation;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;

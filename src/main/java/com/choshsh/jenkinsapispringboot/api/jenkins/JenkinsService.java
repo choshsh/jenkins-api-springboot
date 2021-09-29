@@ -1,5 +1,6 @@
 package com.choshsh.jenkinsapispringboot.api.jenkins;
 
+import com.cdancy.jenkins.rest.domain.job.Artifact;
 import com.cdancy.jenkins.rest.domain.job.BuildInfo;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +21,20 @@ public class JenkinsService {
     this.jenkinsRepository = jenkinsRepository;
   }
 
-  public List<JenkinsEntity> listJob() {
+  public List<JenkinsEntity> listBuild() {
     List<JenkinsEntity> list = new ArrayList<>();
-    jenkinsRepository.findAll().forEach(jenkinsEntity -> {
+
+    jenkinsRepository.findAllByOrderByRegDateDesc().forEach(jenkinsEntity -> {
       BuildInfo buildInfo = jenkinsWrapper.buildInfo(jenkinsEntity.getJobName(),
           jenkinsEntity.getBuildNumber());
       jenkinsEntity.setResult(buildInfo.result());
       jenkinsEntity.setDuration(buildInfo.duration());
-      jenkinsEntity.setArtifacts(buildInfo.artifacts());
+      jenkinsEntity.setArtifacts(
+          buildInfo.artifacts().stream().map(Artifact::fileName)
+              .collect(Collectors.toList()));
+      list.add(jenkinsEntity);
     });
+
     return list;
   }
 

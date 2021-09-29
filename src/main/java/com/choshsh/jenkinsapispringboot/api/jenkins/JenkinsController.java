@@ -25,9 +25,10 @@ public class JenkinsController {
     this.jenkinsRepository = jenkinsRepository;
   }
 
-  @GetMapping("/jenkins/job")
+  @ApiOperation(value = "빌드 리스트 조회")
+  @GetMapping("/jenkins/build")
   public List<JenkinsEntity> listJob() {
-    return jenkinsService.listJob();
+    return jenkinsService.listBuild();
   }
 
   @ApiOperation(value = "빌드 실행")
