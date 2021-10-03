@@ -94,13 +94,11 @@ public class JenkinsWrapper {
    */
   public BuildInfo traceBuild(String jobName, int buildNumber) {
     connect();
-    QueueItem queueItem = client.api().queueApi().queueItem(buildNumber);
     BuildInfo buildInfo = buildInfo(jobName, buildNumber);
     try {
       while (buildInfo.result() == null) {
         Thread.sleep(SLEEP_MILLS);
-        buildInfo = client.api().jobsApi()
-            .buildInfo(null, jobName, queueItem.executable().number());
+        buildInfo = buildInfo(jobName, buildNumber);
       }
     } catch (Exception e) {
       log.error("빌드 추적 에러 : {}", e.getMessage());

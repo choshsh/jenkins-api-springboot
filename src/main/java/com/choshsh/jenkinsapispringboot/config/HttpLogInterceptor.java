@@ -20,6 +20,14 @@ public class HttpLogInterceptor implements HandlerInterceptor {
     return true;
   }
 
+  /**
+   * http 통신 로그. latency 가시화 및 json 출력을 목적으로 했는데 다른 방법도 있는지 확인 필요
+   *
+   * @param request
+   * @param response
+   * @param handler
+   * @param ex
+   */
   @Override
   public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
       Object handler, Exception ex) {
