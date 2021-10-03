@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EnumController {
 
-  @GetMapping(value = "/api/code/yn")
+  @GetMapping(value = "/jenkins/code/yn")
   public List<EnumDTO> yn() {
     return Arrays
         .stream(YN.class.getEnumConstants())
@@ -17,7 +17,7 @@ public class EnumController {
         .collect(Collectors.toList());
   }
 
-  @GetMapping(value = "/api/code/locustenv")
+  @GetMapping(value = "/jenkins/code/locustenv")
   public List<EnumDTO> locustenv() {
     return Arrays
         .stream(LocustEnv.class.getEnumConstants())

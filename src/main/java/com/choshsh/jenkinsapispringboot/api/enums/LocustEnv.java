@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum LocustEnv implements EnumModel {
 
-  K("In Kubernetes"), E("External");
+  E("External"), I("In-Cluster");
 
   private final String value;
 
