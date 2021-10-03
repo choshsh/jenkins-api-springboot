@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.4'
+	id 'org.springframework.boot' version '2.5.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id 'com.google.cloud.tools.jib' version '3.1.4'
@@ -7,7 +7,7 @@ plugins {
 
 group = 'com.choshsh'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '16'
+sourceCompatibility = '1.8'
 
 configurations {
 	compileOnly {
@@ -26,8 +26,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	implementation 'com.cdancy:jenkins-rest:0.0.29'
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -41,13 +41,8 @@ test {
 
 bootRun {
 	String activeProfile = System.properties['spring.profiles.active']
-	println("Profile ===> " + activeProfile)
 	systemProperty "spring.profiles.active", activeProfile
 }
-test {
-	String activeProfile = System.properties['spring.profiles.active']
-	println("Profile ===> " + activeProfile)
-	systemProperty "spring.profiles.active", activeProfile
-}
+
 
 javadoc { source = sourceSets.main.java.srcDirs options.encoding = 'UTF-8' }

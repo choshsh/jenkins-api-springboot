@@ -10,15 +10,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
-    private final HttpLogInterceptor httpLogInterceptor;
+  private final HttpLogInterceptor httpLogInterceptor;
 
-    @Value("${management.endpoints.web.base-path}")
-    private String managementUri;
+  @Value("${management.endpoints.web.base-path}")
+  private String managementUri;
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(httpLogInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns(managementUri + "/**");
-    }
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(httpLogInterceptor)
+        .addPathPatterns("/**")
+        .excludePathPatterns(managementUri + "/**");
+  }
 }
