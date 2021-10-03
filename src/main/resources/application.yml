@@ -15,6 +15,7 @@ logging:
   level:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 ---
+pyscriptURL: "https://api.github.com/repos/choshsh/devops-study/git/trees/master?recursive=3"
 spring: # default
   config:
     activate:
