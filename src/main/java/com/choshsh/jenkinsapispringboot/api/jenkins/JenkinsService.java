@@ -75,7 +75,7 @@ public class JenkinsService {
    * @param jenkinsEntity
    * @return JenkinsEntity
    */
-  public JenkinsEntity build(JenkinsEntity jenkinsEntity) {
+  public JenkinsEntity build(JenkinsEntity jenkinsEntity) throws Exception {
     int queueId = jenkinsWrapper.build(jenkinsEntity.getJobName(),
         jenkinsEntity.getParams());
     jenkinsEntity.setBuildNumber(jenkinsWrapper.traceQueue(queueId));

@@ -18,20 +18,32 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class JenkinsWrapper {
 
-  public static String cred = "choshsh:11b3bd881b210e2d770fab52fe6fffaa43";
-  public static JenkinsClient client;
+  private String cred = "choshsh:11b3bd881b210e2d770fab52fe6fffaa43";
+  private static JenkinsClient client;
   private static final long SLEEP_MILLS = 2000;
+
+  public JenkinsWrapper() {
+    connect();
+  }
+
+  public JenkinsWrapper(String cred) {
+    this.cred = cred;
+    connect();
+  }
 
   /**
    * Jenkins 서버 연결
    */
   public void connect() {
-    if (client == null) {
-      client = JenkinsClient.builder()
-          .credentials(cred)
-          .build();
+    client = JenkinsClient.builder()
+        .credentials(cred)
+        .build();
 
-      SystemInfo systemInfo = client.api().systemApi().systemInfo();
+    SystemInfo systemInfo = client.api().systemApi().systemInfo();
+    if (systemInfo.jenkinsVersion().equals("-1")) {
+      throw new RuntimeException("jenkins 연결 실패: 연결 정보를 확인하세요.");
+    } else {
+      log.info("Jenkins 연결 성공");
       log.info("Jenkins 버전 : {}", systemInfo.jenkinsVersion());
       log.info("Jenkins URL : {}", client.endPoint());
     }
@@ -45,8 +57,7 @@ public class JenkinsWrapper {
    * @return int 큐 ID
    * @throws Exception
    */
-  public int build(String jobName, Map<String, String> params) {
-    connect();
+  public int build(String jobName, Map<String, String> params) throws Exception {
     // 빌드 요청
     IntegerResponse queueId = params == null ?
         client.api().jobsApi().build(null, jobName)
@@ -62,13 +73,12 @@ public class JenkinsWrapper {
    * @param queueId 큐 ID
    * @return int 빌드번호
    */
-  public int traceQueue(int queueId) {
-    connect();
+  public int traceQueue(int queueId) throws Exception {
     QueueItem queueItem = client.api().queueApi().queueItem(queueId);
     int buildNumber;
     while (true) {
       if (queueItem.cancelled()) {
-        throw new RuntimeException("Queue item cancelled");
+        throw new Exception("Queue item cancelled");
       }
       if (queueItem.executable() != null) {
         buildNumber = queueItem.executable().number();
@@ -93,7 +103,6 @@ public class JenkinsWrapper {
    * @throws Exception
    */
   public BuildInfo traceBuild(String jobName, int buildNumber) {
-    connect();
     BuildInfo buildInfo = buildInfo(jobName, buildNumber);
     try {
       while (buildInfo.result() == null) {
@@ -114,7 +123,6 @@ public class JenkinsWrapper {
    * @return Boolean
    */
   public Boolean isBuild(String jobName, int buildNumber) {
-    connect();
     return client.api().jobsApi()
         .buildInfo(null, jobName, buildNumber).building();
   }
@@ -127,7 +135,6 @@ public class JenkinsWrapper {
    * @return
    */
   public BuildInfo buildInfo(String jobName, int buildNumber) {
-    connect();
     return client.api().jobsApi()
         .buildInfo(null, jobName, buildNumber);
   }
@@ -139,7 +146,6 @@ public class JenkinsWrapper {
    * @return JobInfo
    */
   public JobInfo jobInfo(String jobName) {
-    connect();
     return client.api().jobsApi().jobInfo(null, jobName);
   }
 
@@ -149,13 +155,12 @@ public class JenkinsWrapper {
    * @param msg    에러 이름
    * @param errors
    */
-  public void jenkinsErrorHandler(String msg, List<Error> errors) {
-    connect();
+  public void jenkinsErrorHandler(String msg, List<Error> errors) throws Exception {
     if (errors.size() > 0) {
       for (Error error : errors) {
         log.error("Exception : {}", error.exceptionName());
       }
-      throw new RuntimeException(msg);
+      throw new Exception(msg);
     }
   }
 

@@ -2,9 +2,9 @@ package com.choshsh.jenkinsapispringboot.api.jenkins;
 
 import com.cdancy.jenkins.rest.domain.job.BuildInfo;
 import com.choshsh.jenkinsapispringboot.utils.GithubFileTree;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,25 +13,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @RestController
 public class JenkinsController {
 
+  @Value("${pyscriptURL}")
+  private String pyscriptURL;
   private final JenkinsWrapper jenkinsWrapper;
   private final JenkinsService jenkinsService;
   private final JenkinsRepository jenkinsRepository;
-  private ObjectMapper mapper = new ObjectMapper();
-  private final RestTemplate restTemplate = new RestTemplate();
-  @Value("${pyscriptURL}")
-  private String pyscriptURL;
+  private final WebClient webClient;
 
   public JenkinsController(JenkinsWrapper jenkinsWrapper,
       JenkinsService jenkinsService,
-      JenkinsRepository jenkinsRepository) {
+      JenkinsRepository jenkinsRepository,
+      WebClient webClient) {
     this.jenkinsWrapper = jenkinsWrapper;
     this.jenkinsService = jenkinsService;
     this.jenkinsRepository = jenkinsRepository;
+    this.webClient = webClient;
   }
 
   @ApiOperation(value = "빌드 리스트 조회")
@@ -49,7 +50,7 @@ public class JenkinsController {
   @ApiOperation(value = "빌드 실행")
   @ResponseBody
   @PostMapping("/jenkins/build")
-  public JenkinsEntity build(@RequestBody JenkinsEntity jenkinsEntity) {
+  public JenkinsEntity build(@RequestBody JenkinsEntity jenkinsEntity) throws Exception {
     return jenkinsService.build(jenkinsEntity);
   }
 
@@ -72,16 +73,23 @@ public class JenkinsController {
   public List<String> pyscriptList() {
     String searchString = "script/loadtest/";
 
-    GithubFileTree data = restTemplate.getForObject(pyscriptURL, GithubFileTree.class);
-    if (data == null) {
-      return null;
-    } else {
-      return data.getTree()
-          .stream()
-          .filter(item -> item.get("path").indexOf(searchString) > -1)
-          .map(item -> item.get("path"))
-          .collect(Collectors.toList());
-    }
+    Optional<GithubFileTree> githubFileTreeOptional = webClient.get()
+        .uri(pyscriptURL)
+        .retrieve()
+        .bodyToMono(GithubFileTree.class)
+        .flux().toStream()
+        .findFirst();
+
+    return githubFileTreeOptional.map(
+            githubFileTree ->
+                githubFileTree
+                    .getTree()
+                    .stream()
+                    .filter(item -> item.get("path").contains(searchString))
+                    .map(item -> item.get("path"))
+                    .collect(Collectors.toList()))
+        .orElse(null);
+
   }
 
 }
