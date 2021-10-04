@@ -110,6 +110,7 @@ class JenkinsRestTest {
     System.out.println(queueItem.toString());
     BuildInfo buildInfo = client.api().jobsApi()
         .buildInfo(null, jobName, queueItem.executable().number());
+
     while (buildInfo.result() == null) {
       Thread.sleep(2000);
       buildInfo = client.api().jobsApi().buildInfo(null, jobName, queueItem.executable().number());
