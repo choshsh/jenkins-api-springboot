@@ -4,6 +4,7 @@ import com.cdancy.jenkins.rest.JenkinsClient;
 import com.cdancy.jenkins.rest.domain.common.Error;
 import com.cdancy.jenkins.rest.domain.common.IntegerResponse;
 import com.cdancy.jenkins.rest.domain.job.BuildInfo;
+import com.cdancy.jenkins.rest.domain.job.Job;
 import com.cdancy.jenkins.rest.domain.job.JobInfo;
 import com.cdancy.jenkins.rest.domain.queue.QueueItem;
 import com.cdancy.jenkins.rest.domain.system.SystemInfo;
@@ -89,6 +90,7 @@ public class JenkinsWrapper {
         queueItem = client.api().queueApi().queueItem(queueId);
       } catch (Exception e) {
         log.error("큐 추적 에러 : {}", e.getMessage());
+        throw new Exception("Queue item occurs error");
       }
     }
     return buildNumber;
@@ -140,6 +142,17 @@ public class JenkinsWrapper {
   }
 
   /**
+   * Job 마지막 빌드 번호 조회
+   *
+   * @param jobName Job 이름
+   * @return int
+   */
+  public int lastBuildNumber(String jobName) {
+    return client.api().jobsApi().lastBuildNumber(null, jobName);
+
+  }
+
+  /**
    * Job 조회
    *
    * @param jobName Job 이름
@@ -147,6 +160,15 @@ public class JenkinsWrapper {
    */
   public JobInfo jobInfo(String jobName) {
     return client.api().jobsApi().jobInfo(null, jobName);
+  }
+
+  /**
+   * Job 리스트 조회
+   *
+   * @return List
+   */
+  public List<Job> jobList() {
+    return client.api().jobsApi().jobList("").jobs();
   }
 
   /**

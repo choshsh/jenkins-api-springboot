@@ -2,19 +2,12 @@ package com.choshsh.jenkinsapispringboot;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
-import com.cdancy.jenkins.rest.JenkinsClient;
-import com.cdancy.jenkins.rest.domain.common.Error;
-import com.cdancy.jenkins.rest.domain.common.IntegerResponse;
 import com.cdancy.jenkins.rest.domain.job.BuildInfo;
 import com.cdancy.jenkins.rest.domain.job.Job;
-import com.cdancy.jenkins.rest.domain.queue.QueueItem;
-import com.cdancy.jenkins.rest.domain.system.SystemInfo;
-import com.cdancy.jenkins.rest.features.JobsApi;
-import com.google.common.collect.Lists;
+import com.choshsh.jenkinsapispringboot.api.jenkins.JenkinsWrapper;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
@@ -28,103 +21,105 @@ import org.springframework.boot.test.context.SpringBootTest;
 class JenkinsRestTest {
 
   private final static Logger logger = Logger.getLogger("Test");
-  private static JenkinsClient client;
-  private static JobsApi jobsApi;
-  private static List<Job> jobs;
+  private static JenkinsWrapper jenkinsWrapper;
 
+  private static List<Job> jobs;
+  private static String jobName;
+  private static int buildNumber = 0;
+  private static int queueId;
+  private static BuildInfo buildInfo;
+
+  // jenkins 서버와 연결
   @Test
   @BeforeAll
   static void CONNECT() {
     String cred = "choshsh:11b3bd881b210e2d770fab52fe6fffaa43"; // <username>:<password>
-    client = JenkinsClient.builder()
-        .credentials(cred)
-        .build();
-    SystemInfo systemInfo = client.api().systemApi().systemInfo();
-    logger.info("Jenkins 버전 : " + systemInfo.jenkinsVersion());
-    logger.info("Jenkins URL : " + client.endPoint());
-
-    then(systemInfo).isNotNull();
+    jenkinsWrapper = new JenkinsWrapper(cred);
+    then(jenkinsWrapper).isNotNull();
   }
 
+  // job 리스트 조회
   @Test
   @Order(1)
   void JOB_LIST() {
-    jobsApi = client.api().jobsApi();
-    jobs = jobsApi.jobList("").jobs();
+    jobs = jenkinsWrapper.jobList();
+    then(jobs.size()).isGreaterThan(0);
     jobs.forEach(job -> logger.info(job.toString()));
-    then(jobs).isNotNull();
   }
 
+  // 특정 job의 빌드 조회
   @Test
   @Order(2)
   void BUILD_INFO() {
-    Job job = jobs.stream().findAny().orElseGet(null);
-    then(job).isNotNull();
-    logger.info("Job 이름 : " + job.name());
-    logger.info("마지막 빌드 번호 : " + jobsApi.lastBuildNumber(null, job.name()));
-    logger.info("마지막 빌드 설명 : " + jobsApi.buildInfo(null, job.name(),
-        jobsApi.lastBuildNumber(null, job.name())).fullDisplayName());
-    logger.info("마지막 빌드 결과 : " + jobsApi.buildInfo(null, job.name(),
-        jobsApi.lastBuildNumber(null, job.name())).result());
-
-    logger.info("마지막 빌드 소요시간 : "
-        + TimeUnit.MILLISECONDS.toSeconds(
-        jobsApi.buildInfo(null, job.name(), jobsApi.lastBuildNumber(null, job.name())).duration())
-        + "초");
+    Job job = jobs.get(0);
+    String jobName = job.name();
+    BuildInfo buildInfo = jenkinsWrapper.buildInfo(
+        jobName,
+        jenkinsWrapper.lastBuildNumber(jobName)
+    );
+    logger.info("Job 이름 : " + jobName);
+    logger.info("마지막 빌드 번호 : " + buildInfo.number());
+    logger.info("마지막 빌드 설명 : " + buildInfo.description());
+    logger.info("마지막 빌드 소요시간 : " + buildInfo.duration());
   }
 
+  // 빌드
   @Test
   @Order(3)
-  void BUILD_JOB() throws Exception {
-    String jobName = "CoreDNS Debug";
+  void BUILD() {
+    jobName = "CoreDNS Debug";
 
-    // 빌드
-    Map<String, List<String>> params = new HashMap<>();
-    params.put("EXTERNAL_URL", Lists.newArrayList("google.com"));
-    IntegerResponse queueId = jobsApi.buildWithParameters(null, jobName, params);
-    if (queueId.errors().size() > 0) {
-      for (Error error : queueId.errors()) {
-        System.out.println(error);
-      }
-      throw new RuntimeException("빌드 에러");
+    // 파라미터 세팅
+    Map<String, String> params = new HashMap<>();
+    params.put("EXTERNAL_URL", "google.com");
+
+    // 빌드 실행
+    try {
+      queueId = jenkinsWrapper.build(jobName, params);
+    } catch (Exception e) {
+      throw new RuntimeException("빌드 요청 에러");
     }
 
-    // 큐 체크
-    QueueItem queueItem = client.api().queueApi().queueItem(queueId.value());
+    then(queueId).isGreaterThan(-1);
+    logger.info("job 이름 : " + jobName);
+    logger.info("큐 ID : " + String.valueOf(queueId));
+  }
 
-    while (true) {
-      if (queueItem.cancelled()) {
-        throw new RuntimeException("Queue item cancelled");
-      }
-
-      if (queueItem.executable() != null) {
-        System.out.println(queueItem.executable().number());
-        break;
-      }
-
-      Thread.sleep(2000);
-      queueItem = client.api().queueApi().queueItem(queueId.value());
+  // 큐 추적
+  @Test
+  @Order(4)
+  void TRACE_QUEUE() {
+    try {
+      buildNumber = jenkinsWrapper.traceQueue(queueId);
+    } catch (Exception e) {
+      throw new RuntimeException("빌드 큐 에러");
     }
 
-    // 빌드 정보 조회
-    System.out.println(queueItem.toString());
-    BuildInfo buildInfo = client.api().jobsApi()
-        .buildInfo(null, jobName, queueItem.executable().number());
+    then(buildNumber).isGreaterThan(0);
+    logger.info("빌드 번호 : " + String.valueOf(buildNumber));
+  }
 
-    while (buildInfo.result() == null) {
-      Thread.sleep(2000);
-      buildInfo = client.api().jobsApi().buildInfo(null, jobName, queueItem.executable().number());
-      System.out.println(buildInfo.actions().toString());
-      System.out.println(buildInfo.building());
+  // 빌드 추적
+  @Test
+  @Order(5)
+  void TRACE_BUILD() {
+    buildInfo = jenkinsWrapper.traceBuild(jobName, buildNumber);
+    then(buildInfo.result()).isNotNull();
+    logger.info("빌드 정보 : " + buildInfo.toString());
+  }
+
+  // 결과
+  @Test
+  @Order(6)
+  void BUILD_RESULT() {
+    String result = buildInfo.result();
+    switch (result) {
+      case "SUCCESS":
+        logger.info("빌드 URL : " + buildInfo.url());
+        logger.info("빌드 시간 : " + buildInfo.duration() / 1000 + "초");
+      default:
+        logger.info("빌드 결과 : " + result);
     }
-
-    System.out.println(buildInfo.displayName());
-    System.out.println(buildInfo.number());
-    System.out.println(buildInfo.duration() / 1000);
-    System.out.println(buildInfo.actions().toString());
-    System.out.println(buildInfo.result());
-
-    then(buildInfo.result()).isEqualTo("SUCCESS");
   }
 
 }
