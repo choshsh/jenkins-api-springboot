@@ -20,8 +20,8 @@ import org.springframework.stereotype.Component;
 public class JenkinsWrapper {
 
   private String cred = "choshsh:11b3bd881b210e2d770fab52fe6fffaa43";
-  private static JenkinsClient client;
-  private static final long SLEEP_MILLS = 2000;
+  private JenkinsClient client;
+  private final long SLEEP_MILLS = 2000;
 
   public JenkinsWrapper() {
     connect();
