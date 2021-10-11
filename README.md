@@ -24,7 +24,7 @@ jenkins api를 사용하여 job 실행 및 모니터링을 하기 위한 개발�
 
 **Pod 예시**
 
-인증 정보는 `<id>:<token>` 형식입니다. ([jenkins 사용자 token 생성하기](https://www.notion.so/89b9a9ff76ef405b82ba068b4752fb7c))
+인증 정보는 `<id>:<token>` 형식입니다. ([jenkins 사용자 token 생성하기](https://choshsh.notion.site/89b9a9ff76ef405b82ba068b4752fb7c))
 
 ```yaml
 ...
