@@ -18,12 +18,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RestController
 public class JenkinsController {
 
-  @Value("${pyscriptURL}")
-  private String pyscriptURL;
   private final JenkinsWrapper jenkinsWrapper;
   private final JenkinsService jenkinsService;
   private final JenkinsRepository jenkinsRepository;
-  private final WebClient webClient;
+  private static WebClient webClient;
+
+  @Value("${pyscriptURL}")
+  private String pyscriptURL;
+  private static final String PREFIX = "/jenkins";
 
   public JenkinsController(JenkinsWrapper jenkinsWrapper,
       JenkinsService jenkinsService,
@@ -36,40 +38,40 @@ public class JenkinsController {
   }
 
   @ApiOperation(value = "빌드 리스트 조회")
-  @GetMapping("/jenkins/build")
+  @GetMapping(PREFIX + "/build")
   public List<JenkinsEntity> listJob() {
     return jenkinsService.listBuild();
   }
 
   @ApiOperation(value = "빌드 조회")
-  @GetMapping("/jenkins/build/{id}")
+  @GetMapping(PREFIX + "/build/{id}")
   public JenkinsEntity infoJob(@PathVariable("id") Long id) {
     return jenkinsService.infoBuild(id);
   }
 
   @ApiOperation(value = "빌드 실행")
   @ResponseBody
-  @PostMapping("/jenkins/build")
+  @PostMapping(PREFIX + "/build")
   public JenkinsEntity build(@RequestBody JenkinsEntity jenkinsEntity) throws Exception {
     return jenkinsService.build(jenkinsEntity);
   }
 
   @ApiOperation(value = "빌드 실행 중인지 조회")
-  @GetMapping("/jenkins/{jobName}}/{buildNumber}}/status")
+  @GetMapping(PREFIX + "/{jobName}}/{buildNumber}}/status")
   public Boolean isBuild(@PathVariable("jobName") String jobName,
       @PathVariable("buildNumber") int buildNumber) {
     return jenkinsWrapper.isBuild(jobName, buildNumber);
   }
 
   @ApiOperation(value = "빌드 추적")
-  @GetMapping("/jenkins/{jobName}}/{buildNumber}}/trace")
+  @GetMapping(PREFIX + "/{jobName}}/{buildNumber}}/trace")
   public BuildInfo traceBuild(@PathVariable("jobName") String jobName,
       @PathVariable("buildNumber") int buildNumber) {
     return jenkinsWrapper.traceBuild(jobName, buildNumber);
   }
 
   @ApiOperation(value = "GitHub에서 부하테스트 파이썬 스크립트 리스트 조회")
-  @GetMapping("/jenkins/pyscript")
+  @GetMapping(PREFIX + "/pyscript")
   public List<String> pyscriptList() {
     String searchString = "script/loadtest/";
 
@@ -89,7 +91,6 @@ public class JenkinsController {
                     .map(item -> item.get("path"))
                     .collect(Collectors.toList()))
         .orElse(null);
-
   }
 
 }

@@ -17,9 +17,7 @@ logging:
 ---
 pyscriptURL: "https://api.github.com/repos/choshsh/devops-study/git/trees/master?recursive=3"
 spring: # default
-  config:
-    activate:
-      on-profile: "default"
+  config.activate.on-profile: "default"
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
