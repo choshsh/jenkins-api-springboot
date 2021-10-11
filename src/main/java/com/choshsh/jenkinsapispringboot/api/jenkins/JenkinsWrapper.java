@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class JenkinsWrapper {
 
-  private String cred = "choshsh:11b3bd881b210e2d770fab52fe6fffaa43";
   private JenkinsClient client;
   private final long SLEEP_MILLS = 2000;
 
@@ -28,7 +27,6 @@ public class JenkinsWrapper {
   }
 
   public JenkinsWrapper(String cred) {
-    this.cred = cred;
     connect();
   }
 
@@ -37,7 +35,6 @@ public class JenkinsWrapper {
    */
   public void connect() {
     client = JenkinsClient.builder()
-        .credentials(cred)
         .build();
 
     SystemInfo systemInfo = client.api().systemApi().systemInfo();
