@@ -23,7 +23,7 @@ public class JenkinsController {
   private final JenkinsRepository jenkinsRepository;
   private static WebClient webClient;
 
-  @Value("${pyscriptURL}")
+  @Value("${jenkins.pyscriptURL}")
   private String pyscriptURL;
   private static final String PREFIX = "/jenkins";
 
