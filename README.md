@@ -36,7 +36,7 @@ env:
     value: "choshsh:11b3bd881b210e2d770fab52fe6fffaa43"
 ```
 
-## 빌드 시 연결 확인
+##  시 연결 확인
 
 ```java
 2021-10-12 00:43:17 - INFO --- c.c.j.api.jenkins.JenkinsWrapper         : Jenkins 연결 성공
