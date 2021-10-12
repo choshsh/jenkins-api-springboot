@@ -8,7 +8,7 @@ spring:
       "staging": "staging, default"
 ---
 spring:
-  config.ctivate.on-profile: "dev"
+  config.activate.on-profile: "dev"
 server:
   port: 8081
 logging:
