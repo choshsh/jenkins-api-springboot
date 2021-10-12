@@ -4,7 +4,7 @@ jenkins api를 사용하여 job 실행 및 모니터링을 하기 위한 개발�
 
 아래 2가지를 사용하여 api를 구현했습니다.
 
-- [jenkins 공식 사이트](https://www.jenkins.io/doc/book/using/remote-access-api/#RemoteaccessAPI-JavaAPIwrappers)에서  소개하는 Java API wrapper인 [jenkins-rest](https://github.com/cdancy/jenkins-rest)
+- [jenkins-rest](https://github.com/cdancy/jenkins-rest) ([jenkins 공식 사이트](https://www.jenkins.io/doc/book/using/remote-access-api/#RemoteaccessAPI-JavaAPIwrappers)에서  소개하는 Java API wrapper)
 - Spring Boot
 
 ## API 문서
