@@ -121,7 +121,7 @@ public class JenkinsWrapper {
    * @param buildNumber 빌드번호
    * @return Boolean
    */
-  public Boolean isBuild(String jobName, int buildNumber) {
+  public Boolean building(String jobName, int buildNumber) {
     return client.api().jobsApi()
         .buildInfo(null, jobName, buildNumber).building();
   }

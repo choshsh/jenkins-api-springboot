@@ -882,14 +882,14 @@
                     <li data-group="JenkinsController" data-name="buildUsingPOST" class="">
                       <a href="#api-JenkinsController-buildUsingPOST">buildUsingPOST</a>
                     </li>
-                    <li data-group="JenkinsController" data-name="infoJobUsingGET" class="">
-                      <a href="#api-JenkinsController-infoJobUsingGET">infoJobUsingGET</a>
+                    <li data-group="JenkinsController" data-name="infoUsingGET" class="">
+                      <a href="#api-JenkinsController-infoUsingGET">infoUsingGET</a>
                     </li>
-                    <li data-group="JenkinsController" data-name="isBuildUsingGET" class="">
-                      <a href="#api-JenkinsController-isBuildUsingGET">isBuildUsingGET</a>
+                    <li data-group="JenkinsController" data-name="isBuildingUsingGET" class="">
+                      <a href="#api-JenkinsController-isBuildingUsingGET">isBuildingUsingGET</a>
                     </li>
-                    <li data-group="JenkinsController" data-name="listJobUsingGET" class="">
-                      <a href="#api-JenkinsController-listJobUsingGET">listJobUsingGET</a>
+                    <li data-group="JenkinsController" data-name="listUsingGET" class="">
+                      <a href="#api-JenkinsController-listUsingGET">listUsingGET</a>
                     </li>
                     <li data-group="JenkinsController" data-name="pyscriptListUsingGET" class="">
                       <a href="#api-JenkinsController-pyscriptListUsingGET">pyscriptListUsingGET</a>
@@ -922,7 +922,7 @@
                       <article id="api-EnumController-locustenvUsingGET-0" data-group="User" data-name="locustenvUsingGET" data-version="0">
                         <div class="pull-left">
                           <h1>locustenvUsingGET</h1>
-                          <p>locustenv</p>
+                          <p>부하테스트 환경 코드 조회 (클러스터 외부 or 내부)</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -1004,7 +1004,7 @@ public class EnumControllerApiExample {
                               <pre class="prettyprint"><code class="language-cpp">
 EnumControllerApi *apiInstance = [[EnumControllerApi alloc] init];
 
-// locustenv
+// 부하테스트 환경 코드 조회 (클러스터 외부 or 내부)
 [apiInstance locustenvUsingGETWithCompletionHandler: 
               ^(array[EnumDTO] output, NSError* error) {
                             if (output) {
@@ -1053,7 +1053,7 @@ namespace Example
 
             try
             {
-                // locustenv
+                // 부하테스트 환경 코드 조회 (클러스터 외부 or 내부)
                 array[EnumDTO] result = apiInstance.locustenvUsingGET();
                 Debug.WriteLine(result);
             }
@@ -1109,7 +1109,7 @@ from pprint import pprint
 api_instance = swagger_client.EnumControllerApi()
 
 try: 
-    # locustenv
+    # 부하테스트 환경 코드 조회 (클러스터 외부 or 내부)
     api_response = api_instance.locustenv_using_get()
     pprint(api_response)
 except ApiException as e:
@@ -1184,7 +1184,7 @@ except ApiException as e:
                       <article id="api-EnumController-ynUsingGET-0" data-group="User" data-name="ynUsingGET" data-version="0">
                         <div class="pull-left">
                           <h1>ynUsingGET</h1>
-                          <p>yn</p>
+                          <p>YN 코드 조회</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -1266,7 +1266,7 @@ public class EnumControllerApiExample {
                               <pre class="prettyprint"><code class="language-cpp">
 EnumControllerApi *apiInstance = [[EnumControllerApi alloc] init];
 
-// yn
+// YN 코드 조회
 [apiInstance ynUsingGETWithCompletionHandler: 
               ^(array[EnumDTO] output, NSError* error) {
                             if (output) {
@@ -1315,7 +1315,7 @@ namespace Example
 
             try
             {
-                // yn
+                // YN 코드 조회
                 array[EnumDTO] result = apiInstance.ynUsingGET();
                 Debug.WriteLine(result);
             }
@@ -1371,7 +1371,7 @@ from pprint import pprint
 api_instance = swagger_client.EnumControllerApi()
 
 try: 
-    # yn
+    # YN 코드 조회
     api_response = api_instance.yn_using_get()
     pprint(api_response)
 except ApiException as e:
@@ -1756,10 +1756,10 @@ except ApiException as e:
                         </article>
                       </div>
                       <hr>
-                    <div id="api-JenkinsController-infoJobUsingGET">
-                      <article id="api-JenkinsController-infoJobUsingGET-0" data-group="User" data-name="infoJobUsingGET" data-version="0">
+                    <div id="api-JenkinsController-infoUsingGET">
+                      <article id="api-JenkinsController-infoUsingGET-0" data-group="User" data-name="infoUsingGET" data-version="0">
                         <div class="pull-left">
-                          <h1>infoJobUsingGET</h1>
+                          <h1>infoUsingGET</h1>
                           <p>빌드 조회</p>
                         </div>
                         <div class="pull-right"></div>
@@ -1773,26 +1773,26 @@ except ApiException as e:
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-JenkinsController-infoJobUsingGET-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-JenkinsController-infoJobUsingGET-0-java">Java</a></li>
-                          <li class=""><a href="#examples-JenkinsController-infoJobUsingGET-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-JenkinsController-infoJobUsingGET-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-JenkinsController-infoJobUsingGET-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-JenkinsController-infoJobUsingGET-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-JenkinsController-infoJobUsingGET-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-JenkinsController-infoJobUsingGET-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-JenkinsController-infoJobUsingGET-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-JenkinsController-infoJobUsingGET-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-JenkinsController-infoJobUsingGET-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-JenkinsController-infoUsingGET-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-JenkinsController-infoUsingGET-0-java">Java</a></li>
+                          <li class=""><a href="#examples-JenkinsController-infoUsingGET-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-JenkinsController-infoUsingGET-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-JenkinsController-infoUsingGET-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-JenkinsController-infoUsingGET-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-JenkinsController-infoUsingGET-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-JenkinsController-infoUsingGET-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-JenkinsController-infoUsingGET-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-JenkinsController-infoUsingGET-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-JenkinsController-infoUsingGET-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-JenkinsController-infoJobUsingGET-0-curl">
+                          <div class="tab-pane active" id="examples-JenkinsController-infoUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: */*"\
 "http://localhost:8081/jenkins/build/{id}"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-JenkinsController-infoJobUsingGET-0-java">
+                          <div class="tab-pane" id="examples-JenkinsController-infoUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
@@ -1808,17 +1808,17 @@ public class JenkinsControllerApiExample {
         JenkinsControllerApi apiInstance = new JenkinsControllerApi();
         Long id = 789; // Long | id
         try {
-            JenkinsEntityRes result = apiInstance.infoJobUsingGET(id);
+            JenkinsEntityRes result = apiInstance.infoUsingGET(id);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling JenkinsControllerApi#infoJobUsingGET");
+            System.err.println("Exception when calling JenkinsControllerApi#infoUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-JenkinsController-infoJobUsingGET-0-android">
+                          <div class="tab-pane" id="examples-JenkinsController-infoUsingGET-0-android">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.JenkinsControllerApi;
 
 public class JenkinsControllerApiExample {
@@ -1827,26 +1827,26 @@ public class JenkinsControllerApiExample {
         JenkinsControllerApi apiInstance = new JenkinsControllerApi();
         Long id = 789; // Long | id
         try {
-            JenkinsEntityRes result = apiInstance.infoJobUsingGET(id);
+            JenkinsEntityRes result = apiInstance.infoUsingGET(id);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling JenkinsControllerApi#infoJobUsingGET");
+            System.err.println("Exception when calling JenkinsControllerApi#infoUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-JenkinsController-infoJobUsingGET-0-groovy">
+  <div class="tab-pane" id="examples-JenkinsController-infoUsingGET-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-JenkinsController-infoJobUsingGET-0-objc">
+                            <div class="tab-pane" id="examples-JenkinsController-infoUsingGET-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">Long *id = 789; // id
 
 JenkinsControllerApi *apiInstance = [[JenkinsControllerApi alloc] init];
 
 // 빌드 조회
-[apiInstance infoJobUsingGETWith:id
+[apiInstance infoUsingGETWith:id
               completionHandler: ^(JenkinsEntityRes output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -1858,7 +1858,7 @@ JenkinsControllerApi *apiInstance = [[JenkinsControllerApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-JenkinsController-infoJobUsingGET-0-javascript">
+                            <div class="tab-pane" id="examples-JenkinsController-infoUsingGET-0-javascript">
                               <pre class="prettyprint"><code class="language-js">var JenkinsApiSpringbootSwagger = require('jenkins_api_springboot_swagger');
 
 var api = new JenkinsApiSpringbootSwagger.JenkinsControllerApi()
@@ -1871,14 +1871,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.infoJobUsingGET(id, callback);
+api.infoUsingGET(id, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-JenkinsController-infoJobUsingGET-0-angular">
+                            <!--<div class="tab-pane" id="examples-JenkinsController-infoUsingGET-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-JenkinsController-infoJobUsingGET-0-csharp">
+                            <div class="tab-pane" id="examples-JenkinsController-infoUsingGET-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -1887,7 +1887,7 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class infoJobUsingGETExample
+    public class infoUsingGETExample
     {
         public void main()
         {
@@ -1898,12 +1898,12 @@ namespace Example
             try
             {
                 // 빌드 조회
-                JenkinsEntityRes result = apiInstance.infoJobUsingGET(id);
+                JenkinsEntityRes result = apiInstance.infoUsingGET(id);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling JenkinsControllerApi.infoJobUsingGET: " + e.Message );
+                Debug.Print("Exception when calling JenkinsControllerApi.infoUsingGET: " + e.Message );
             }
         }
     }
@@ -1911,7 +1911,7 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-JenkinsController-infoJobUsingGET-0-php">
+                            <div class="tab-pane" id="examples-JenkinsController-infoUsingGET-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
@@ -1919,15 +1919,15 @@ $api_instance = new Swagger\Client\ApiJenkinsControllerApi();
 $id = 789; // Long | id
 
 try {
-    $result = $api_instance->infoJobUsingGET($id);
+    $result = $api_instance->infoUsingGET($id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling JenkinsControllerApi->infoJobUsingGET: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling JenkinsControllerApi->infoUsingGET: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-JenkinsController-infoJobUsingGET-0-perl">
+                            <div class="tab-pane" id="examples-JenkinsController-infoUsingGET-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::JenkinsControllerApi;
@@ -1936,15 +1936,15 @@ my $api_instance = WWW::SwaggerClient::JenkinsControllerApi->new();
 my $id = 789; # Long | id
 
 eval { 
-    my $result = $api_instance->infoJobUsingGET(id => $id);
+    my $result = $api_instance->infoUsingGET(id => $id);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling JenkinsControllerApi->infoJobUsingGET: $@\n";
+    warn "Exception when calling JenkinsControllerApi->infoUsingGET: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-JenkinsController-infoJobUsingGET-0-python">
+                            <div class="tab-pane" id="examples-JenkinsController-infoUsingGET-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -1957,10 +1957,10 @@ id = 789 # Long | id
 
 try: 
     # 빌드 조회
-    api_response = api_instance.info_job_using_get(id)
+    api_response = api_instance.info_using_get(id)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling JenkinsControllerApi->infoJobUsingGET: %s\n" % e)</code></pre>
+    print("Exception when calling JenkinsControllerApi->infoUsingGET: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -1976,7 +1976,7 @@ except ApiException as e:
                                   <td>
                                   
                                   
-                                      <div id="d2e199_infoJobUsingGET_id">
+                                      <div id="d2e199_infoUsingGET_id">
                                           <div class="json-schema-view">
                                               <div class="primitive">
                                                   <span class="type">
@@ -2008,14 +2008,14 @@ except ApiException as e:
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-infoJobUsingGET-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-infoUsingGET-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-infoJobUsingGET-200-schema">
-                                  <div id='responses-infoJobUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-infoUsingGET-200-schema">
+                                  <div id='responses-infoUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -2041,25 +2041,25 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-infoJobUsingGET-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-infoJobUsingGET-200-schema-200');
+                                        $('#responses-infoUsingGET-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-infoUsingGET-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-infoJobUsingGET-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-infoUsingGET-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
                         </article>
                       </div>
                       <hr>
-                    <div id="api-JenkinsController-isBuildUsingGET">
-                      <article id="api-JenkinsController-isBuildUsingGET-0" data-group="User" data-name="isBuildUsingGET" data-version="0">
+                    <div id="api-JenkinsController-isBuildingUsingGET">
+                      <article id="api-JenkinsController-isBuildingUsingGET-0" data-group="User" data-name="isBuildingUsingGET" data-version="0">
                         <div class="pull-left">
-                          <h1>isBuildUsingGET</h1>
-                          <p>빌드 실행 중인지 조회</p>
+                          <h1>isBuildingUsingGET</h1>
+                          <p>빌드 중인지 조회</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -2067,31 +2067,31 @@ except ApiException as e:
                         <p class="marked"></p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/jenkins/{jobName}}/{buildNumber}}/status</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/jenkins/{jobName}}/{buildNumber}}/building</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-JenkinsController-isBuildUsingGET-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-JenkinsController-isBuildUsingGET-0-java">Java</a></li>
-                          <li class=""><a href="#examples-JenkinsController-isBuildUsingGET-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-JenkinsController-isBuildUsingGET-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-JenkinsController-isBuildUsingGET-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-JenkinsController-isBuildUsingGET-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-JenkinsController-isBuildUsingGET-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-JenkinsController-isBuildUsingGET-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-JenkinsController-isBuildUsingGET-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-JenkinsController-isBuildUsingGET-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-JenkinsController-isBuildUsingGET-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-JenkinsController-isBuildingUsingGET-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-JenkinsController-isBuildingUsingGET-0-java">Java</a></li>
+                          <li class=""><a href="#examples-JenkinsController-isBuildingUsingGET-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-JenkinsController-isBuildingUsingGET-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-JenkinsController-isBuildingUsingGET-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-JenkinsController-isBuildingUsingGET-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-JenkinsController-isBuildingUsingGET-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-JenkinsController-isBuildingUsingGET-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-JenkinsController-isBuildingUsingGET-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-JenkinsController-isBuildingUsingGET-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-JenkinsController-isBuildingUsingGET-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-JenkinsController-isBuildUsingGET-0-curl">
+                          <div class="tab-pane active" id="examples-JenkinsController-isBuildingUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: */*"\
-"http://localhost:8081/jenkins/{jobName}}/{buildNumber}}/status"</code></pre>
+"http://localhost:8081/jenkins/{jobName}}/{buildNumber}}/building"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-JenkinsController-isBuildUsingGET-0-java">
+                          <div class="tab-pane" id="examples-JenkinsController-isBuildingUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
@@ -2108,17 +2108,17 @@ public class JenkinsControllerApiExample {
         String jobName = jobName_example; // String | jobName
         Integer buildNumber = 56; // Integer | buildNumber
         try {
-            'Boolean' result = apiInstance.isBuildUsingGET(jobName, buildNumber);
+            'Boolean' result = apiInstance.isBuildingUsingGET(jobName, buildNumber);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling JenkinsControllerApi#isBuildUsingGET");
+            System.err.println("Exception when calling JenkinsControllerApi#isBuildingUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-JenkinsController-isBuildUsingGET-0-android">
+                          <div class="tab-pane" id="examples-JenkinsController-isBuildingUsingGET-0-android">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.JenkinsControllerApi;
 
 public class JenkinsControllerApiExample {
@@ -2128,27 +2128,27 @@ public class JenkinsControllerApiExample {
         String jobName = jobName_example; // String | jobName
         Integer buildNumber = 56; // Integer | buildNumber
         try {
-            'Boolean' result = apiInstance.isBuildUsingGET(jobName, buildNumber);
+            'Boolean' result = apiInstance.isBuildingUsingGET(jobName, buildNumber);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling JenkinsControllerApi#isBuildUsingGET");
+            System.err.println("Exception when calling JenkinsControllerApi#isBuildingUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-JenkinsController-isBuildUsingGET-0-groovy">
+  <div class="tab-pane" id="examples-JenkinsController-isBuildingUsingGET-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-JenkinsController-isBuildUsingGET-0-objc">
+                            <div class="tab-pane" id="examples-JenkinsController-isBuildingUsingGET-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">String *jobName = jobName_example; // jobName
 Integer *buildNumber = 56; // buildNumber
 
 JenkinsControllerApi *apiInstance = [[JenkinsControllerApi alloc] init];
 
-// 빌드 실행 중인지 조회
-[apiInstance isBuildUsingGETWith:jobName
+// 빌드 중인지 조회
+[apiInstance isBuildingUsingGETWith:jobName
     buildNumber:buildNumber
               completionHandler: ^('Boolean' output, NSError* error) {
                             if (output) {
@@ -2161,7 +2161,7 @@ JenkinsControllerApi *apiInstance = [[JenkinsControllerApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-JenkinsController-isBuildUsingGET-0-javascript">
+                            <div class="tab-pane" id="examples-JenkinsController-isBuildingUsingGET-0-javascript">
                               <pre class="prettyprint"><code class="language-js">var JenkinsApiSpringbootSwagger = require('jenkins_api_springboot_swagger');
 
 var api = new JenkinsApiSpringbootSwagger.JenkinsControllerApi()
@@ -2175,14 +2175,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.isBuildUsingGET(jobName, buildNumber, callback);
+api.isBuildingUsingGET(jobName, buildNumber, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-JenkinsController-isBuildUsingGET-0-angular">
+                            <!--<div class="tab-pane" id="examples-JenkinsController-isBuildingUsingGET-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-JenkinsController-isBuildUsingGET-0-csharp">
+                            <div class="tab-pane" id="examples-JenkinsController-isBuildingUsingGET-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -2191,7 +2191,7 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class isBuildUsingGETExample
+    public class isBuildingUsingGETExample
     {
         public void main()
         {
@@ -2202,13 +2202,13 @@ namespace Example
 
             try
             {
-                // 빌드 실행 중인지 조회
-                'Boolean' result = apiInstance.isBuildUsingGET(jobName, buildNumber);
+                // 빌드 중인지 조회
+                'Boolean' result = apiInstance.isBuildingUsingGET(jobName, buildNumber);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling JenkinsControllerApi.isBuildUsingGET: " + e.Message );
+                Debug.Print("Exception when calling JenkinsControllerApi.isBuildingUsingGET: " + e.Message );
             }
         }
     }
@@ -2216,7 +2216,7 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-JenkinsController-isBuildUsingGET-0-php">
+                            <div class="tab-pane" id="examples-JenkinsController-isBuildingUsingGET-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
@@ -2225,15 +2225,15 @@ $jobName = jobName_example; // String | jobName
 $buildNumber = 56; // Integer | buildNumber
 
 try {
-    $result = $api_instance->isBuildUsingGET($jobName, $buildNumber);
+    $result = $api_instance->isBuildingUsingGET($jobName, $buildNumber);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling JenkinsControllerApi->isBuildUsingGET: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling JenkinsControllerApi->isBuildingUsingGET: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-JenkinsController-isBuildUsingGET-0-perl">
+                            <div class="tab-pane" id="examples-JenkinsController-isBuildingUsingGET-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::JenkinsControllerApi;
@@ -2243,15 +2243,15 @@ my $jobName = jobName_example; # String | jobName
 my $buildNumber = 56; # Integer | buildNumber
 
 eval { 
-    my $result = $api_instance->isBuildUsingGET(jobName => $jobName, buildNumber => $buildNumber);
+    my $result = $api_instance->isBuildingUsingGET(jobName => $jobName, buildNumber => $buildNumber);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling JenkinsControllerApi->isBuildUsingGET: $@\n";
+    warn "Exception when calling JenkinsControllerApi->isBuildingUsingGET: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-JenkinsController-isBuildUsingGET-0-python">
+                            <div class="tab-pane" id="examples-JenkinsController-isBuildingUsingGET-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -2264,11 +2264,11 @@ jobName = jobName_example # String | jobName
 buildNumber = 56 # Integer | buildNumber
 
 try: 
-    # 빌드 실행 중인지 조회
-    api_response = api_instance.is_build_using_get(jobName, buildNumber)
+    # 빌드 중인지 조회
+    api_response = api_instance.is_building_using_get(jobName, buildNumber)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling JenkinsControllerApi->isBuildUsingGET: %s\n" % e)</code></pre>
+    print("Exception when calling JenkinsControllerApi->isBuildingUsingGET: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -2284,7 +2284,7 @@ except ApiException as e:
                                   <td>
                                   
                                   
-                                      <div id="d2e199_isBuildUsingGET_jobName">
+                                      <div id="d2e199_isBuildingUsingGET_jobName">
                                           <div class="json-schema-view">
                                               <div class="primitive">
                                                   <span class="type">
@@ -2306,7 +2306,7 @@ except ApiException as e:
                                   <td>
                                   
                                   
-                                      <div id="d2e199_isBuildUsingGET_buildNumber">
+                                      <div id="d2e199_isBuildingUsingGET_buildNumber">
                                           <div class="json-schema-view">
                                               <div class="primitive">
                                                   <span class="type">
@@ -2338,14 +2338,14 @@ except ApiException as e:
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-isBuildUsingGET-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-isBuildingUsingGET-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-isBuildUsingGET-200-schema">
-                                  <div id='responses-isBuildUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-isBuildingUsingGET-200-schema">
+                                  <div id='responses-isBuildingUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -2372,24 +2372,24 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-isBuildUsingGET-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-isBuildUsingGET-200-schema-200');
+                                        $('#responses-isBuildingUsingGET-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-isBuildingUsingGET-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-isBuildUsingGET-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-isBuildingUsingGET-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
                         </article>
                       </div>
                       <hr>
-                    <div id="api-JenkinsController-listJobUsingGET">
-                      <article id="api-JenkinsController-listJobUsingGET-0" data-group="User" data-name="listJobUsingGET" data-version="0">
+                    <div id="api-JenkinsController-listUsingGET">
+                      <article id="api-JenkinsController-listUsingGET-0" data-group="User" data-name="listUsingGET" data-version="0">
                         <div class="pull-left">
-                          <h1>listJobUsingGET</h1>
+                          <h1>listUsingGET</h1>
                           <p>빌드 리스트 조회</p>
                         </div>
                         <div class="pull-right"></div>
@@ -2403,26 +2403,26 @@ except ApiException as e:
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-JenkinsController-listJobUsingGET-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-JenkinsController-listJobUsingGET-0-java">Java</a></li>
-                          <li class=""><a href="#examples-JenkinsController-listJobUsingGET-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-JenkinsController-listJobUsingGET-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-JenkinsController-listJobUsingGET-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-JenkinsController-listJobUsingGET-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-JenkinsController-listJobUsingGET-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-JenkinsController-listJobUsingGET-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-JenkinsController-listJobUsingGET-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-JenkinsController-listJobUsingGET-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-JenkinsController-listJobUsingGET-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-JenkinsController-listUsingGET-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-JenkinsController-listUsingGET-0-java">Java</a></li>
+                          <li class=""><a href="#examples-JenkinsController-listUsingGET-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-JenkinsController-listUsingGET-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-JenkinsController-listUsingGET-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-JenkinsController-listUsingGET-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-JenkinsController-listUsingGET-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-JenkinsController-listUsingGET-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-JenkinsController-listUsingGET-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-JenkinsController-listUsingGET-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-JenkinsController-listUsingGET-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-JenkinsController-listJobUsingGET-0-curl">
+                          <div class="tab-pane active" id="examples-JenkinsController-listUsingGET-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: */*"\
 "http://localhost:8081/jenkins/build"</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-JenkinsController-listJobUsingGET-0-java">
+                          <div class="tab-pane" id="examples-JenkinsController-listUsingGET-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
@@ -2437,17 +2437,17 @@ public class JenkinsControllerApiExample {
         
         JenkinsControllerApi apiInstance = new JenkinsControllerApi();
         try {
-            array[JenkinsEntityRes] result = apiInstance.listJobUsingGET();
+            array[JenkinsEntityRes] result = apiInstance.listUsingGET();
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling JenkinsControllerApi#listJobUsingGET");
+            System.err.println("Exception when calling JenkinsControllerApi#listUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-JenkinsController-listJobUsingGET-0-android">
+                          <div class="tab-pane" id="examples-JenkinsController-listUsingGET-0-android">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.JenkinsControllerApi;
 
 public class JenkinsControllerApiExample {
@@ -2455,25 +2455,25 @@ public class JenkinsControllerApiExample {
     public static void main(String[] args) {
         JenkinsControllerApi apiInstance = new JenkinsControllerApi();
         try {
-            array[JenkinsEntityRes] result = apiInstance.listJobUsingGET();
+            array[JenkinsEntityRes] result = apiInstance.listUsingGET();
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling JenkinsControllerApi#listJobUsingGET");
+            System.err.println("Exception when calling JenkinsControllerApi#listUsingGET");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-JenkinsController-listJobUsingGET-0-groovy">
+  <div class="tab-pane" id="examples-JenkinsController-listUsingGET-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-JenkinsController-listJobUsingGET-0-objc">
+                            <div class="tab-pane" id="examples-JenkinsController-listUsingGET-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">
 JenkinsControllerApi *apiInstance = [[JenkinsControllerApi alloc] init];
 
 // 빌드 리스트 조회
-[apiInstance listJobUsingGETWithCompletionHandler: 
+[apiInstance listUsingGETWithCompletionHandler: 
               ^(array[JenkinsEntityRes] output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -2485,7 +2485,7 @@ JenkinsControllerApi *apiInstance = [[JenkinsControllerApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-JenkinsController-listJobUsingGET-0-javascript">
+                            <div class="tab-pane" id="examples-JenkinsController-listUsingGET-0-javascript">
                               <pre class="prettyprint"><code class="language-js">var JenkinsApiSpringbootSwagger = require('jenkins_api_springboot_swagger');
 
 var api = new JenkinsApiSpringbootSwagger.JenkinsControllerApi()
@@ -2496,14 +2496,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.listJobUsingGET(callback);
+api.listUsingGET(callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-JenkinsController-listJobUsingGET-0-angular">
+                            <!--<div class="tab-pane" id="examples-JenkinsController-listUsingGET-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-JenkinsController-listJobUsingGET-0-csharp">
+                            <div class="tab-pane" id="examples-JenkinsController-listUsingGET-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -2512,7 +2512,7 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class listJobUsingGETExample
+    public class listUsingGETExample
     {
         public void main()
         {
@@ -2522,12 +2522,12 @@ namespace Example
             try
             {
                 // 빌드 리스트 조회
-                array[JenkinsEntityRes] result = apiInstance.listJobUsingGET();
+                array[JenkinsEntityRes] result = apiInstance.listUsingGET();
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling JenkinsControllerApi.listJobUsingGET: " + e.Message );
+                Debug.Print("Exception when calling JenkinsControllerApi.listUsingGET: " + e.Message );
             }
         }
     }
@@ -2535,22 +2535,22 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-JenkinsController-listJobUsingGET-0-php">
+                            <div class="tab-pane" id="examples-JenkinsController-listUsingGET-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiJenkinsControllerApi();
 
 try {
-    $result = $api_instance->listJobUsingGET();
+    $result = $api_instance->listUsingGET();
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling JenkinsControllerApi->listJobUsingGET: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling JenkinsControllerApi->listUsingGET: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-JenkinsController-listJobUsingGET-0-perl">
+                            <div class="tab-pane" id="examples-JenkinsController-listUsingGET-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::JenkinsControllerApi;
@@ -2558,15 +2558,15 @@ use WWW::SwaggerClient::JenkinsControllerApi;
 my $api_instance = WWW::SwaggerClient::JenkinsControllerApi->new();
 
 eval { 
-    my $result = $api_instance->listJobUsingGET();
+    my $result = $api_instance->listUsingGET();
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling JenkinsControllerApi->listJobUsingGET: $@\n";
+    warn "Exception when calling JenkinsControllerApi->listUsingGET: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-JenkinsController-listJobUsingGET-0-python">
+                            <div class="tab-pane" id="examples-JenkinsController-listUsingGET-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -2578,10 +2578,10 @@ api_instance = swagger_client.JenkinsControllerApi()
 
 try: 
     # 빌드 리스트 조회
-    api_response = api_instance.list_job_using_get()
+    api_response = api_instance.list_using_get()
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling JenkinsControllerApi->listJobUsingGET: %s\n" % e)</code></pre>
+    print("Exception when calling JenkinsControllerApi->listUsingGET: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -2597,14 +2597,14 @@ except ApiException as e:
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-listJobUsingGET-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-listUsingGET-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-listJobUsingGET-200-schema">
-                                  <div id='responses-listJobUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-listUsingGET-200-schema">
+                                  <div id='responses-listUsingGET-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -2634,14 +2634,14 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-listJobUsingGET-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-listJobUsingGET-200-schema-200');
+                                        $('#responses-listUsingGET-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-listUsingGET-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-listJobUsingGET-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-listUsingGET-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
