@@ -39,13 +39,13 @@ public class JenkinsController {
 
   @ApiOperation(value = "빌드 리스트 조회")
   @GetMapping(PREFIX + "/build")
-  public List<JenkinsEntity> listJob() {
+  public List<JenkinsEntity> list() {
     return jenkinsService.listBuild();
   }
 
   @ApiOperation(value = "빌드 조회")
   @GetMapping(PREFIX + "/build/{id}")
-  public JenkinsEntity infoJob(@PathVariable("id") Long id) {
+  public JenkinsEntity info(@PathVariable("id") Long id) {
     return jenkinsService.infoBuild(id);
   }
 
@@ -56,11 +56,11 @@ public class JenkinsController {
     return jenkinsService.build(jenkinsEntity);
   }
 
-  @ApiOperation(value = "빌드 실행 중인지 조회")
-  @GetMapping(PREFIX + "/{jobName}}/{buildNumber}}/status")
-  public Boolean isBuild(@PathVariable("jobName") String jobName,
+  @ApiOperation(value = "빌드 중인지 조회")
+  @GetMapping(PREFIX + "/{jobName}}/{buildNumber}}/building")
+  public Boolean isBuilding(@PathVariable("jobName") String jobName,
       @PathVariable("buildNumber") int buildNumber) {
-    return jenkinsWrapper.isBuild(jobName, buildNumber);
+    return jenkinsWrapper.building(jobName, buildNumber);
   }
 
   @ApiOperation(value = "빌드 추적")

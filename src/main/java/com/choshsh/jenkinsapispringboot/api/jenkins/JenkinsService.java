@@ -16,8 +16,10 @@ public class JenkinsService {
   private final JenkinsWrapper jenkinsWrapper;
   private final JenkinsRepository jenkinsRepository;
 
-  public JenkinsService(JenkinsWrapper jenkinsWrapper,
-      JenkinsRepository jenkinsRepository) {
+  public JenkinsService(
+      JenkinsWrapper jenkinsWrapper,
+      JenkinsRepository jenkinsRepository
+  ) {
     this.jenkinsWrapper = jenkinsWrapper;
     this.jenkinsRepository = jenkinsRepository;
   }
@@ -29,18 +31,12 @@ public class JenkinsService {
    */
   public List<JenkinsEntity> listBuild() {
     List<JenkinsEntity> list = new ArrayList<>();
-
-    jenkinsRepository.findAllByOrderByRegDateDesc().forEach(jenkinsEntity -> {
-      BuildInfo buildInfo = jenkinsWrapper.buildInfo(jenkinsEntity.getJobName(),
-          jenkinsEntity.getBuildNumber());
-      jenkinsEntity.setTimestamp(buildInfo.timestamp());
-      jenkinsEntity.setResult(buildInfo.result());
-      jenkinsEntity.setDuration(buildInfo.duration());
-      jenkinsEntity.setArtifacts(
-          buildInfo.artifacts().stream().map(Artifact::fileName)
-              .collect(Collectors.toList()));
-      list.add(jenkinsEntity);
-    });
+    jenkinsRepository
+        .findAllByOrderByRegDateDesc()
+        .forEach(jenkinsEntity -> {
+          jenkinsEntity = setBuildInfoData(jenkinsEntity);
+          list.add(jenkinsEntity);
+        });
 
     return list;
   }
@@ -52,21 +48,9 @@ public class JenkinsService {
    */
   public JenkinsEntity infoBuild(Long id) {
     Optional<JenkinsEntity> jenkinsEntityOptional = jenkinsRepository.findById(id);
-    if (!jenkinsEntityOptional.isPresent()) {
-      return null;
-    } else {
-      JenkinsEntity jenkinsEntity = jenkinsEntityOptional.get();
-
-      BuildInfo buildInfo = jenkinsWrapper.buildInfo(jenkinsEntity.getJobName(),
-          jenkinsEntity.getBuildNumber());
-      jenkinsEntity.setTimestamp(buildInfo.timestamp());
-      jenkinsEntity.setResult(buildInfo.result());
-      jenkinsEntity.setDuration(buildInfo.duration());
-      jenkinsEntity.setArtifacts(
-          buildInfo.artifacts().stream().map(Artifact::fileName)
-              .collect(Collectors.toList()));
-      return jenkinsEntity;
-    }
+    return jenkinsEntityOptional
+        .map(this::setBuildInfoData)
+        .orElse(null);
   }
 
   /**
@@ -76,8 +60,7 @@ public class JenkinsService {
    * @return JenkinsEntity
    */
   public JenkinsEntity build(JenkinsEntity jenkinsEntity) throws Exception {
-    int queueId = jenkinsWrapper.build(jenkinsEntity.getJobName(),
-        jenkinsEntity.getParams());
+    int queueId = jenkinsWrapper.build(jenkinsEntity.getJobName(), jenkinsEntity.getParams());
     jenkinsEntity.setBuildNumber(jenkinsWrapper.traceQueue(queueId));
     return save(jenkinsEntity);
   }
@@ -90,12 +73,34 @@ public class JenkinsService {
    */
   public JenkinsEntity save(JenkinsEntity jenkinsEntity) {
     if (!jenkinsEntity.getParams().isEmpty()) {
-      jenkinsEntity.setParamKeys(
-          jenkinsEntity.getParams().keySet().stream().collect(Collectors.toList()));
-      jenkinsEntity.setParamValues(
-          jenkinsEntity.getParams().values().stream().collect(Collectors.toList()));
+      jenkinsEntity.setParamKeys(new ArrayList<>(jenkinsEntity.getParams().keySet()));
+      jenkinsEntity.setParamValues(new ArrayList<>(jenkinsEntity.getParams().values()));
     }
     return jenkinsRepository.save(jenkinsEntity);
+  }
+
+  /**
+   * {@link JenkinsEntity}에 Jenkins Build 데이터 추가 (timestamp, result, duration, artifacts)
+   *
+   * @param jenkinsEntity
+   * @return JenkinsEntity
+   */
+  public JenkinsEntity setBuildInfoData(JenkinsEntity jenkinsEntity) {
+    BuildInfo buildInfo = jenkinsWrapper.buildInfo(
+        jenkinsEntity.getJobName(),
+        jenkinsEntity.getBuildNumber()
+    );
+
+    jenkinsEntity.setTimestamp(buildInfo.timestamp());
+    jenkinsEntity.setResult(buildInfo.result());
+    jenkinsEntity.setDuration(buildInfo.duration());
+    jenkinsEntity.setArtifacts(
+        buildInfo
+            .artifacts()
+            .stream()
+            .map(Artifact::fileName)
+            .collect(Collectors.toList()));
+    return jenkinsEntity;
   }
 
 }
