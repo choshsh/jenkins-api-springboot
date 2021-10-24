@@ -9,23 +9,9 @@ spring:
 ---
 spring:
   config.activate.on-profile: "dev"
-server:
-  port: 8081
-logging:
-  level:
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
----
-jenkins:
-  pyscriptURL: "https://api.github.com/repos/choshsh/devops-study/git/trees/master?recursive=3"
-spring: # default
-  config.activate.on-profile: "default"
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-    show-sql: true
-    open-in-view: true
-    properties.hibernate.format_sql: false
     hibernate:
-      use-new-id-generator-mappings: true
       ddl-auto: create-drop
   datasource:
     initialization-mode: always
@@ -39,9 +25,55 @@ spring: # default
       path: /h2-console
       settings:
         web-admin-password: choshsh
+server:
+  port: 8081
+management:
+  endpoints:
+    web:
+      base-path: "/actuator"
+      exposure:
+        include:
+          - health
+          - prometheus
+---
+spring:
+  config.activate.on-profile: "prod"
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+  datasource:
+    initialization-mode: never
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_URL}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+server:
+  port: 8080
+management:
+  endpoints:
+    web:
+      base-path: ${ACTUATOR_PATH}
+      exposure:
+        include:
+          - health
+          - prometheus
+---
+jenkins:
+  pyscriptURL: "https://api.github.com/repos/choshsh/devops-study/git/trees/master?recursive=3"
+spring: # default
+  config.activate.on-profile: "default"
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    open-in-view: false
+    properties.hibernate.format_sql: false
+    hibernate:
+      use-new-id-generator-mappings: true
 logging:
   level:
     web: warn
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
   pattern:
     #console: "{\"timestamp\": \"%d\", \"level\": \"%p\", \"source\": \"%logger{63}:%L\", \"message\": \"%replace(%m%wEx{6}){'[\r\n]+', '\\n'}%nopex\"}%n"
     console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(---){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
@@ -56,10 +88,3 @@ server:
       force: true
     session:
       timeout: 14400
-management:
-  endpoints:
-    web:
-      base-path: /manage
-      exposure:
-        include:
-          - health
