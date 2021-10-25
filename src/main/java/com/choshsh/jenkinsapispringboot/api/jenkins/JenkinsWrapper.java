@@ -34,8 +34,7 @@ public class JenkinsWrapper {
    * Jenkins 서버 연결
    */
   public void connect() {
-    client = JenkinsClient.builder()
-        .build();
+    client = JenkinsClient.builder().build();
 
     SystemInfo systemInfo = client.api().systemApi().systemInfo();
     if (systemInfo.jenkinsVersion().equals("-1")) {

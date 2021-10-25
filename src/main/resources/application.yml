@@ -66,7 +66,7 @@ spring: # default
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
-    open-in-view: false
+    open-in-view: true
     properties.hibernate.format_sql: false
     hibernate:
       use-new-id-generator-mappings: true
