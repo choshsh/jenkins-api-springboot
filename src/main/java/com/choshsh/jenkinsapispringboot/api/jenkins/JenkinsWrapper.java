@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,8 +21,6 @@ public class JenkinsWrapper {
 
   private JenkinsClient client;
   private final long SLEEP_MILLS = 2000;
-  @Value("${spring.profiles.active}")
-  String springProfile;
 
   public JenkinsWrapper() {
     connect();
@@ -41,11 +38,7 @@ public class JenkinsWrapper {
 
     SystemInfo systemInfo = client.api().systemApi().systemInfo();
     if (systemInfo.jenkinsVersion().equals("-1")) {
-      if (springProfile.equalsIgnoreCase("dev")) {
-        log.error("jenkins 연결 실패: 연결 정보를 확인하세요.");
-      } else {
-        throw new RuntimeException("jenkins 연결 실패: 연결 정보를 확인하세요.");
-      }
+      throw new RuntimeException("jenkins 연결 실패: 연결 정보를 확인하세요.");
     } else {
       log.info("Jenkins 연결 성공");
       log.info("Jenkins 버전 : {}", systemInfo.jenkinsVersion());
