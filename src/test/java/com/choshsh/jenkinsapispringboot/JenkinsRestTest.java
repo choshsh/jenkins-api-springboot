@@ -10,14 +10,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
+@ActiveProfiles({"dev"})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Disabled("jenkins 서버와 job 필요")
 class JenkinsRestTest {
 
   private final static Logger logger = Logger.getLogger("Test");
@@ -67,7 +71,7 @@ class JenkinsRestTest {
   @Test
   @Order(3)
   void BUILD() {
-    jobName = "CoreDNS Debug";
+    jobName = "CoreDNS-Debug";
 
     // 파라미터 세팅
     Map<String, String> params = new HashMap<>();
