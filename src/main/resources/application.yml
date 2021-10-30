@@ -34,18 +34,18 @@ management:
       exposure:
         include:
           - health
-          - prometheus
 ---
 spring:
   config.activate.on-profile: "prod"
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
+    defer-datasource-initialization: false
     hibernate:
       ddl-auto: update
   datasource:
     initialization-mode: never
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_URL}/${MYSQL_DB}
+    url: jdbc:mysql://${MYSQL_URL}/${MYSQL_DB}?${MYSQL_PARAM}
     username: ${MYSQL_USER}
     password: ${MYSQL_PASSWORD}
 server:
@@ -64,7 +64,6 @@ jenkins:
 spring: # default
   config.activate.on-profile: "default"
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
     open-in-view: true
     properties.hibernate.format_sql: false
