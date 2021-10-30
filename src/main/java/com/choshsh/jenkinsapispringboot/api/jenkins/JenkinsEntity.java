@@ -35,7 +35,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-@Table(name = "locust")
+@Table(name = "jenkins")
 public class JenkinsEntity extends BaseColumnEntity {
 
   /**
