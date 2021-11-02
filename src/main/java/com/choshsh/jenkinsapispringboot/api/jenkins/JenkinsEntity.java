@@ -96,6 +96,11 @@ public class JenkinsEntity extends BaseColumnEntity {
   @Transient
   private Long timestamp;
 
+  @Transient
+  private String locustEnvName;
+
+
+
 }
 
 
