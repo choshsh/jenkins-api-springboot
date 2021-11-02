@@ -41,9 +41,9 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     defer-datasource-initialization: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
   datasource:
-    initialization-mode: never
+    initialization-mode: always
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${MYSQL_URL}/${MYSQL_DB}?${MYSQL_PARAM}
     username: ${MYSQL_USER}
