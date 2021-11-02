@@ -94,6 +94,7 @@ public class JenkinsService {
     jenkinsEntity.setTimestamp(buildInfo.timestamp());
     jenkinsEntity.setResult(buildInfo.result());
     jenkinsEntity.setDuration(buildInfo.duration());
+    jenkinsEntity.setLocustEnvName(jenkinsEntity.getLocustEnv().getValue());
     jenkinsEntity.setArtifacts(
         buildInfo
             .artifacts()
