@@ -21,7 +21,7 @@ public class JenkinsController {
   private final JenkinsWrapper jenkinsWrapper;
   private final JenkinsService jenkinsService;
   private final JenkinsRepository jenkinsRepository;
-  private final WebClient webClient;
+  private WebClient webClient;
 
   @Value("${jenkins.pyscriptURL}")
   private String pyscriptURL;
